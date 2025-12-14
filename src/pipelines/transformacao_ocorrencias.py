@@ -1,7 +1,11 @@
 import pandas as pd
+from pathlib import Path
 
-def transform_ocorrencias(df):
+ARTIFACTS_DIR = Path("artifacts")
+ARTIFACTS_DIR.mkdir(exist_ok=True)
 
+
+def transform_ocorrencias(df: pd.DataFrame, save_artifacts: bool = False) -> pd.DataFrame:
     df = df.copy()
 
     # Conversão dataHoraChamada
@@ -12,8 +16,7 @@ def transform_ocorrencias(df):
     df["ano"] = df["dataHoraChamada"].dt.year
     df["fim_de_semana"] = df["dia_semana"].isin([5, 6]).astype(int)
 
-
-    # Padronização statusAtendimento e criação variável atendida
+    # Padronização statusAtendimento
     df["statusAtendimento"] = (
         df["statusAtendimento"]
         .astype(str)
@@ -23,17 +26,16 @@ def transform_ocorrencias(df):
     )
 
     df["atendida"] = (df["statusAtendimento"] == "atendida").astype(int)
- 
 
     # Padronização formaAcionamento
     df["formaAcionamento"] = (
         df["formaAcionamento"]
         .astype(str)
-        .str.strip()     
-        .str.lower()       
+        .str.strip()
+        .str.lower()
     )
 
-    # Criação variável turno
+    # Turno
     def definir_turno(h):
         if 6 <= h < 12:
             return "manha"
@@ -46,8 +48,7 @@ def transform_ocorrencias(df):
 
     df["turno"] = df["hora"].apply(definir_turno)
 
-
-    # Padronização de município
+    # Padronização município
     df["municipio"] = (
         df["municipio"]
         .astype(str)
@@ -55,13 +56,17 @@ def transform_ocorrencias(df):
         .str.lower()
     )
 
-    # Encoding por frequência
+    # 🔹 Encoding por frequência (FEATURE DEPENDENTE DO DATASET)
     freq_municipio = df["municipio"].value_counts(normalize=True)
     df["municipio_freq"] = df["municipio"].map(freq_municipio)
 
+    if save_artifacts:
+        freq_municipio.to_json(ARTIFACTS_DIR / "freq_municipio.json")
+
+    # Drop colunas não usadas
     colunas_drop = [
         "statusAtendimento",
-    "formaAcionamento",
+        "formaAcionamento",
     ]
 
     df = df.drop(columns=colunas_drop, errors="ignore")
