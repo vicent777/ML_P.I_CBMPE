@@ -1,28 +1,33 @@
-# 🤖 **Projeto CHAMA — Módulo de Machine Learning (CBMPE)**  
+# 🤖 Projeto CHAMA — Módulo de Machine Learning (CBMPE)
 
-> 💡 *Módulo de Machine Learning desenvolvido para prever a demanda de ocorrências do Corpo de Bombeiros Militar de Pernambuco (CBMPE), utilizando dados históricos reais e integrado ao sistema CHAMA.*
+> 💡 Módulo de Machine Learning desenvolvido para prever a demanda de ocorrências do Corpo de Bombeiros Militar de Pernambuco (CBMPE), utilizando dados históricos reais e integrado ao sistema CHAMA.
 
----
+O CHAMA conta com um módulo de Machine Learning desacoplado da aplicação principal, implementado como uma **API independente**, responsável por gerar previsões de demanda de ocorrências por município e dia da semana, com base em dados históricos reais.
 
-## 🌐 **Deploy / Integração**
-
-**Modelo consumido via API:**  
-🔗 Integrado ao backend do sistema CHAMA (Node.js + Express)
-
-**Backend (API):**  
-🧩 https://backend-chama.up.railway.app/
-
+Essa API é consumida pelo backend da aplicação, que disponibiliza os dados para o frontend por meio de dashboards preditivos.
 
 ---
 
 ## 🧭 **Visão Geral**
 
-Este repositório contém o **módulo de Machine Learning do sistema CHAMA**, responsável por prever a demanda futura de ocorrências com base em dados históricos reais do CBMPE.
+Este repositório contém o **módulo de Machine Learning do sistema CHAMA**, responsável por prever a demanda futura de ocorrências a partir de dados históricos reais do CBMPE.
 
-O modelo foi desenvolvido após todo o processo de **tratamento, padronização, modelagem e migração dos dados**, que originalmente estavam dispersos em planilhas Excel e passaram a ser armazenados em um banco relacional MySQL.
+O desenvolvimento do modelo foi precedido por todo o processo de **tratamento, padronização, modelagem e migração dos dados**, que originalmente estavam dispersos em planilhas Excel e passaram a ser armazenados em um banco relacional MySQL.
 
 🎯 **Objetivo do modelo:**  
-Apoiar o planejamento operacional do CBMPE, fornecendo previsões que auxiliam na alocação de equipes, viaturas e recursos.
+Apoiar o planejamento operacional do CBMPE, auxiliando na alocação de equipes, viaturas e recursos.
+
+
+## 👥 **Equipe de Desenvolvimento do Projeto CHAMA**
+
+| Nome | Função |
+|------|---------|
+| João Victor Rodrigues Basante | Backend |
+| João Vitor Malveira da Silva | Full-Stack |
+| Maria Clara de Melo | Frontend |
+| Renato Trancoso Branco Delgado | Full-Stack |
+| Thayana Anália dos Santos Lira | Gestão de Projeto |
+| Vinicius Henrique Silva Nascimento | DBA & ML |
 
 ---
 
@@ -78,7 +83,7 @@ O modelo:
 | **Linguagem** | Python |
 | **Modelagem** | XGBoost |
 | **Manipulação de Dados** | Pandas, NumPy |
-| **API** | FastAPI / Flask |
+| **API** | FastAPI |
 | **Banco de Dados** | MySQL |
 | **Integração** | Node.js + Express |
 
@@ -88,15 +93,16 @@ O modelo:
 
 1️⃣ **Clone o repositório**
 ```bash
-
+git clone https://github.com/vicent777/ML_P.I_CBMPE
+```
 2️⃣ **Instale as dependências**
-
+```bash
 pip install -r requirements.txt
-
+```
 3️⃣ **Execute a API**
-
+```bash
 uvicorn main:app --reload
-
+```
 
 📌 Contexto do Projeto CHAMA
 
@@ -112,4 +118,4 @@ geração de dashboards operacionais e preditivos
 
 📜 Licença
 
-Projeto acadêmico desenvolvido no SENAC Pernambuco. Consulte o arquivo LICENSE (se disponível) para mais informações.
+> Consulte o arquivo `LICENSE` (se disponível) ou entre em contato com a equipe para definições de uso.
